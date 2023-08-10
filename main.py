@@ -7,7 +7,8 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # SQLite for simplicity
 db = SQLAlchemy(app)
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 class Button(db.Model):
     id = db.Column(db.Integer, primary_key=True)
